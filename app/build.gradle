@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.example.jarry.playvideo_texuture"
@@ -10,6 +10,12 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
     }
     buildTypes {
         release {
@@ -18,25 +24,21 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
         }
     }
-}
 
-project.afterEvaluate {
-    printf("===============start ndk build======================\n")
-    if (GetNDKBuildCmd() == null) {
-        return;
-    }
-
-    compileDebugNdk.dependsOn 'NDKBuildDebug'
-    compileReleaseNdk.dependsOn 'NDKBuildRelease'
-    clean.dependsOn 'NDKBuildClean'
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
 }

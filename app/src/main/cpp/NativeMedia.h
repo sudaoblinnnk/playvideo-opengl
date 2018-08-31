@@ -7,6 +7,7 @@
 
 #include <jni.h>
 #include <strings.h>
+#include <stdlib.h>
 #include <pthread.h>
 #include <android/log.h>
 #include <GLES3/gl3.h>
